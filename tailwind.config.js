@@ -9,6 +9,9 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         '70/30': '70% 28%'
+      },
+      screens: {
+        xsm: "500px"
       }
     },
   },

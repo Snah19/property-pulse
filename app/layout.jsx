@@ -1,31 +1,38 @@
 import './global.css';
-import { Poppins } from 'next/font/google';
+import 'photoswipe/dist/photoswipe.css';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  display: 'swap',
-});
+import AuthProvider from '@/components/providers/auth-provider';
+import { GlobalProvider } from '@/context/global-context';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { poppins } from '@/fonts';
+import Header from '@/components/layouts/header';
+import Footer from '@/components/layouts/footer';
 
 export const metadata = {
-  title: 'Property Pulse',
+  title: {
+    template: "%s | PropertyPulse",
+    default: "PropertyPulse"
+  },
   keywords: 'rental, property, real estate',
   description: 'Find the perfect rental property'
 };
 
 const Layout = ({children}) => {
   return (
-    <html className={poppins.className}>
-      <body>
-        <header>
-          Header
-        </header>
-        {children}
-        <footer>
-          Footer
-        </footer>
-      </body>
-    </html>
+    <AuthProvider>
+      <GlobalProvider>
+        <html className={poppins.className}>
+          <body className="flex flex-col min-h-screen">
+            <Header />
+            {children}
+            <Footer />
+            <ToastContainer />
+          </body>
+        </html>
+      </GlobalProvider>
+    </AuthProvider>
   );
 };
 
